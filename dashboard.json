@@ -29,6 +29,476 @@
       "fieldConfig": {
         "defaults": {
           "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "12m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "gpu_stats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "average_power_w"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Max Watts",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "df1w5o8549clca"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "mvolt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 4,
+        "y": 0
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "12m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "gpu_stats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "vddgfx_mv"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Max VDD",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "df1w5o8549clca"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 8,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "12m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "gpu_stats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "memory_temperature_c"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Max Mem Temp",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "df1w5o8549clca"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "rotmhz"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "12m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "gpu_stats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gfx_sclk_mhz"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Max Sys Clock",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "df1w5o8549clca"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "rotmhz"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 0
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.2.1",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "12m"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "gpu_stats",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "gfx_mclk_mhz"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Max Mem Clock",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "df1w5o8549clca"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
             "mode": "palette-classic"
           },
           "custom": {
@@ -87,7 +557,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 4
       },
       "id": 8,
       "options": {
@@ -236,7 +706,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 12
       },
       "id": 7,
       "panels": [],
@@ -323,7 +793,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 9
+        "y": 13
       },
       "id": 1,
       "options": {
@@ -511,21 +981,23 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line+area"
             }
           },
           "decimals": 0,
           "mappings": [],
+          "max": 115,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "transparent",
                 "value": 0
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 100
               }
             ]
           },
@@ -545,6 +1017,16 @@
               {
                 "id": "custom.fillOpacity",
                 "value": 15
+              },
+              {
+                "id": "max",
+                "value": 3600
+              },
+              {
+                "id": "custom.thresholdsStyle",
+                "value": {
+                  "mode": "off"
+                }
               }
             ]
           }
@@ -554,7 +1036,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 9
+        "y": 13
       },
       "id": 4,
       "options": {
@@ -750,7 +1232,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 21
       },
       "id": 6,
       "panels": [],
@@ -855,7 +1337,7 @@
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 18
+        "y": 22
       },
       "id": 3,
       "options": {
@@ -1096,7 +1578,7 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 18
+        "y": 22
       },
       "id": 2,
       "options": {
@@ -1337,7 +1819,7 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 18
+        "y": 22
       },
       "id": 5,
       "options": {
@@ -1489,12 +1971,12 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "GPU Stats",
   "uid": "adt7cfk",
-  "version": 9
+  "version": 10
 }
