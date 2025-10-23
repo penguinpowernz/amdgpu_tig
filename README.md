@@ -2,6 +2,9 @@
 
 This is a small setup to monitor your AMD graphics card using `amdgpu_top` via Grafana using telegraf and InfluxDB.
 
+<img width="1595" height="860" alt="image" src="https://github.com/user-attachments/assets/d0c0ef3f-52ca-47cd-8b57-c9fb70f472b4" />
+
+
 ## Installation
 
 Install docker:
