@@ -1,0 +1,152 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'open3'
+
+cmd = "amdgpu_top -J"
+
+# return the sensors hash
+def pull_sensors(data)
+  return nil unless data["devices"]
+  return nil unless data["devices"][0]
+  return nil unless data["devices"][0]["Sensors"]
+  return data["devices"][0]["Sensors"]
+end
+
+# return an ILP string
+# {
+# "Average Power": {
+#     "unit": "W",
+#     "value": 13
+# },
+# "CPU Core freq": [],
+# "CPU Tctl": null,
+# "Edge Critical Temperature": {
+#     "unit": "C",
+#     "value": 100
+# },
+# "Edge Emergency Temperature": {
+#     "unit": "C",
+#     "value": 105
+# },
+# "Edge Temperature": {
+#     "unit": "C",
+#     "value": 43
+# },
+# "FCLK": {
+#     "unit": "MHz",
+#     "value": 1591
+# },
+# "Fan": {
+#     "unit": "RPM",
+#     "value": 0
+# },
+# "Fan Max": {
+#     "unit": "RPM",
+#     "value": 3600
+# },
+# "GFX Power": {
+#     "unit": "W",
+#     "value": 13
+# },
+# "GFX_MCLK": {
+#     "unit": "MHz",
+#     "value": 96
+# },
+# "GFX_SCLK": {
+#     "unit": "MHz",
+#     "value": 22
+# },
+# "Input Power": null,
+# "Junction Critical Temperature": {
+#     "unit": "C",
+#     "value": 110
+# },
+# "Junction Emergency Temperature": {
+#     "unit": "C",
+#     "value": 115
+# },
+# "Junction Temperature": {
+#     "unit": "C",
+#     "value": 45
+# },
+# "Memory Critical Temperature": {
+#     "unit": "C",
+#     "value": 108
+# },
+# "Memory Emergency Temperature": {
+#     "unit": "C",
+#     "value": 113
+# },
+# "Memory Temperature": {
+#     "unit": "C",
+#     "value": 62
+# },
+# "PCI Power State": "D0",
+# "PCIe Link Speed": {
+#     "gen": 4,
+#     "width": 16
+# },
+# "Power Profile": "3D_FULL_SCREEN",
+# "VDDGFX": {
+#     "unit": "mV",
+#     "value": 635
+# },
+# "VDDNB": null
+# }
+def convert_to_ilp(data)
+  name = "gpu_stats"
+  tags = {}
+  fields = {}
+
+  fields["average_power_w"] = data["Average Power"]["value"]
+  fields["edge_critical_temperature_c"] = data["Edge Critical Temperature"]["value"]
+  fields["edge_emergency_temperature_c"] = data["Edge Emergency Temperature"]["value"]
+  fields["edge_temperature_c"] = data["Edge Temperature"]["value"]
+  fields["fclk_mhz"] = data["FCLK"]["value"]
+  fields["fan_rpm"] = data["Fan"]["value"]
+  fields["fan_max_rpm"] = data["Fan Max"]["value"]
+  fields["gfx_power_w"] = data["GFX Power"]["value"]
+  fields["gfx_mclk_mhz"] = data["GFX_MCLK"]["value"]
+  fields["gfx_sclk_mhz"] = data["GFX_SCLK"]["value"]
+  fields["junction_critical_temperature_c"] = data["Junction Critical Temperature"]["value"]
+  fields["junction_emergency_temperature_c"] = data["Junction Emergency Temperature"]["value"]
+  fields["junction_temperature_c"] = data["Junction Temperature"]["value"]
+  fields["memory_critical_temperature_c"] = data["Memory Critical Temperature"]["value"]
+  fields["memory_emergency_temperature_c"] = data["Memory Emergency Temperature"]["value"]
+  fields["memory_temperature_c"] = data["Memory Temperature"]["value"]
+  fields["vddgfx_mv"] = data["VDDGFX"]["value"]
+
+  #return "#{name},#{tags.map{|k,v| "#{k}=#{v}"}.join(",")} #{fields.map{|k,v| "#{k}=#{v}"}.join(",")} #{Time.now.to_i*1000*1000*1000}"
+  return "#{name} #{fields.map{|k,v| "#{k}=#{v}"}.join(",")} #{Time.now.to_i*1000*1000*1000}"
+end
+
+def process_line(line)
+  parsed = JSON.parse(line)
+  return unless parsed
+
+  sensors = pull_sensors(parsed)
+  return unless sensors
+
+  ilp = convert_to_ilp(sensors)
+  return unless ilp
+
+  puts ilp
+end
+
+if ARGV.include?("-d")
+  line = STDIN.gets
+  process_line(line)
+  exit
+end
+
+Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
+  stdout.each_line do |line|
+    begin
+      process_line(line)
+    rescue => e
+      puts "Error: #{e.message}"
+    end
+  end
+end
+

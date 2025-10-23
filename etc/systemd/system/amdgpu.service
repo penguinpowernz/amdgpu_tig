@@ -1,0 +1,6 @@
+[Unit]
+Description=AMDGPU stats tracking to telegraf
+After=telegraf.service
+
+[Service]
+ExecStart=sh -c "/usr/local/bin/amdgpu_tlgfd | nc 127.0.0.1 11233"
