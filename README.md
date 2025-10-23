@@ -58,5 +58,8 @@ systemctl start amdgpu
 
 Setup your data source for influx in grafana, just make sure to set the server URL as `http://172.17.0.1:8086` and the database as `telegraf`.
 
+<img width="686" height="613" alt="image" src="https://github.com/user-attachments/assets/070fa106-bb08-42a1-b8f6-8168089bb2fd" />
+
+
 Then you wanna import the dashboard.json to grafana.
 
